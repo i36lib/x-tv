@@ -16,11 +16,11 @@ if (keystorePropertiesFile.exists()) {
 }
 
 android {
-    namespace = "top.yogiczy.mytv"
+    namespace = "com.github.i36lib.xtv"
     compileSdk = 34
 
     defaultConfig {
-        applicationId = "top.yogiczy.mytv"
+        applicationId = "com.github.i36lib.xtv"
         minSdk = 21
         targetSdk = 34
         versionCode = 1
