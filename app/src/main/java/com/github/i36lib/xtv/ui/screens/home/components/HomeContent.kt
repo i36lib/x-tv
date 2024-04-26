@@ -159,14 +159,14 @@ fun HomeContent(
             }
         }
 
-        if (state.isTempPanelVisible) {
-            IptvTempPanel(
-                channelNo = iptvGroupList.iptvIdx(state.currentIptv) + 1,
-                currentIptv = state.currentIptv,
-                playerError = playerState.error,
-                programmes = epgList.currentProgrammes(state.currentIptv),
-            )
-        }
+//        if (state.isTempPanelVisible) {
+//            IptvTempPanel(
+//                channelNo = iptvGroupList.iptvIdx(state.currentIptv) + 1,
+//                currentIptv = state.currentIptv,
+//                playerError = playerState.error,
+//                programmes = epgList.currentProgrammes(state.currentIptv),
+//            )
+//        }
 
         ChannelNoInput(state = channelNoInputState)
 

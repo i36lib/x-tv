@@ -109,7 +109,7 @@ fun PanelTopRight(
     }
 }
 
-@Preview(device = "id:Android TV (720p)")
+@Preview(device = "id:Android TV (1080p)")
 @Composable
 private fun PanelTopRightPreview() {
     MyTVTheme {
@@ -134,21 +134,21 @@ fun PanelBottom(
         Column(modifier = Modifier.align(Alignment.BottomStart)) {
             val currentProgrammes = remember { epgList.currentProgrammes(currentIptv) }
 
-            PanelIptvInfo(
-                iptv = currentIptv,
-                programmes = currentProgrammes,
-                playerError = playerState.error,
-                modifier = Modifier.padding(start = childPadding.start),
-            )
+                PanelIptvInfo(
+                    iptv = currentIptv,
+                    programmes = currentProgrammes,
+                    playerError = playerState.error,
+                    modifier = Modifier.padding(start = childPadding.start),
+                )
 
-            Spacer(modifier = Modifier.height(20.dp))
+                Spacer(modifier = Modifier.height(20.dp))
 
-            PanelPlayerInfo(
-                resolution = playerState.resolution,
-                modifier = Modifier.padding(start = childPadding.start),
-            )
+                PanelPlayerInfo(
+                    resolution = playerState.resolution,
+                    modifier = Modifier.padding(start = childPadding.start),
+                )
 
-            Spacer(modifier = Modifier.height(20.dp))
+                Spacer(modifier = Modifier.height(20.dp))
 
             PanelIptvGroupList(
                 iptvGroupList = iptvGroupList,
@@ -161,7 +161,7 @@ fun PanelBottom(
     }
 }
 
-@Preview(device = "id:Android TV (720p)")
+@Preview(device = "id:Android TV (1080p)")
 @Composable
 private fun PanelBottomPreview() {
     MyTVTheme {
@@ -173,7 +173,7 @@ private fun PanelBottomPreview() {
     }
 }
 
-@Preview(device = "id:Android TV (720p)")
+@Preview(device = "id:Android TV (1080p)")
 @Composable
 private fun PanelScreenPreview() {
     MyTVTheme {

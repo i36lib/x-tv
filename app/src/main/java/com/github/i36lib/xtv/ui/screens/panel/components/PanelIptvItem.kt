@@ -1,5 +1,7 @@
 package com.github.i36lib.xtv.ui.screens.panel.components
 
+import androidx.compose.foundation.background
+import androidx.compose.foundation.border
 import androidx.compose.foundation.gestures.detectTapGestures
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -18,10 +20,14 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.focus.FocusRequester
 import androidx.compose.ui.focus.focusRequester
 import androidx.compose.ui.focus.onFocusChanged
+import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.input.pointer.pointerInput
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
+import androidx.tv.material3.Border
 import androidx.tv.material3.Card
 import androidx.tv.material3.CardDefaults
 import androidx.tv.material3.ExperimentalTvMaterial3Api
@@ -40,11 +46,24 @@ fun PanelIptvItem(
 ) {
     var isFocused by remember { mutableStateOf(false) }
     val focusRequester = remember { FocusRequester() }
+    val roundedShape = RoundedCornerShape(20.dp)
 
     Card(
         modifier = modifier
-            .width(250.dp)
-            .height(100.dp)
+            .width(
+                if (isFocused) {
+                    310.dp
+                } else {
+                    250.dp
+                }
+            )
+            .height(
+                if (isFocused) {
+                    124.dp
+                } else {
+                    100.dp
+                }
+            )
             .focusRequester(focusRequester)
             .onFocusChanged { isFocused = it.isFocused || it.hasFocus }
             .pointerInput(Unit) {
@@ -54,14 +73,26 @@ fun PanelIptvItem(
                         onIptvSelected()
                     },
                 )
-            },
-        shape = CardDefaults.shape(RoundedCornerShape(20.dp)),
-        scale = CardDefaults.scale(focusedScale = 2.1f),
+            }
+            .border(1.dp, Color(0xFFA8B6C2), roundedShape)
+            .background(
+                brush = Brush.verticalGradient(
+                    colors = if (isFocused) {
+                        listOf(Color(0xFF377C91), Color(0xFF1A4151))
+                    } else {
+                        listOf(Color(0x88286986), Color(0x88286986))
+                    }
+                ),
+                shape = roundedShape,
+            ),
+        shape = CardDefaults.shape(roundedShape),
         colors = CardDefaults.colors(
-            containerColor = Color(28,69,86,128),
-            contentColor = MaterialTheme.colorScheme.onSurface,
-            focusedContainerColor = MaterialTheme.colorScheme.onSurface,
-            focusedContentColor = MaterialTheme.colorScheme.surface,
+            containerColor = Color(0x881C4556),
+            focusedContainerColor = Color(0x00000000),
+        ),
+        border = CardDefaults.border(
+            border = Border.None,
+            focusedBorder = Border.None,
         ),
         onClick = { onIptvSelected() },
     ) {
@@ -69,19 +100,48 @@ fun PanelIptvItem(
             modifier = Modifier
                 .fillMaxSize()
                 .align(Alignment.Start)
-                .padding(start = 20.dp, top = 10.dp, bottom = 15.dp),
+                .let {
+                    if (isFocused) {
+                        it.padding(start = 26.dp, top = 10.dp, bottom = 20.dp)
+                    } else {
+                        it.padding(start = 19.dp, top = 10.dp, bottom = 15.dp)
+                    }
+                },
             verticalArrangement = Arrangement.SpaceAround
         ) {
             Text(
                 text = iptv.name,
                 style = MaterialTheme.typography.bodyLarge,
-                maxLines = 1
+                maxLines = 1,
+                color = Color(0xFFFFFFFF),
+                fontSize = if (isFocused) {
+                    33.sp
+                } else {
+                    28.sp
+                },
+                lineHeight = if (isFocused) {
+                    46.sp
+                } else {
+                    40.sp
+                },
+                fontWeight = FontWeight.Bold
             )
 
             Text(
-                text = programmes.first ?: "正在播放：无",
+                text = programmes.first ?: "问苍茫第24集",
                 style = MaterialTheme.typography.labelSmall,
                 maxLines = 1,
+                fontSize = if (isFocused) {
+                    26.sp
+                } else {
+                    24.sp
+                },
+                color = Color(0x88FFFFFF),
+                lineHeight = if (isFocused) {
+                    37.sp
+                } else {
+                    33.sp
+                },
             )
         }
     }
